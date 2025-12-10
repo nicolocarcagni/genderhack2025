@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender Hack 2025 | Metodologia</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-dark text-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-opacity-75 fixed-top custom-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-accent" href="index.html">
+                <img src="assets/logo.png" alt="GH Logo" width="30" height="30"
+                    class="d-inline-block align-text-top me-2 rounded">
+                Gli Analisti Anonimi
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="normalization.html">Normalizzazione</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container py-5 mt-5">
+
+        <!-- Header Section -->
+        <section id="header" class="mb-5">
+            <div class="row py-5">
+                <div class="col-12 text-center">
+                    <h2 class="display-4 fw-bold mb-3">Pipeline di Normalizzazione</h2>
+                    <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                        Analisi tecnica del processo ETL sviluppato per uniformare dati eterogenei provenienti da MIUR,
+                        Eurostat e dataset DNF.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technique 1: Data Cleaning & Handling Nulls -->
+        <section class="mb-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-5">
+                    <div class="p-3">
+                        <h3 class="fw-bold text-accent mb-3">1. Pulizia Avanzata e Standardizzazione</h3>
+                        <p class="text-white-50">
+                            I dataset grezzi presentavano formati inconsistenti per i valori nulli e "rumore" nei dati
+                            numerici.
+                            Abbiamo implementato una pulizia rigorosa identificando pattern specifici come flag di
+                            errore (es. 'b', 'u' di Eurostat)
+                            e una vasta gamma di rappresentazioni di valori mancanti.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div
+                        class="code-block bg-black p-4 rounded-4 shadow-lg font-monospace small border border-secondary border-opacity-25">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">AnalyzeDNF.py / AnalyzeESTAT.py</span>
+                            <div class="window-dots">
+                                <span class="dot bg-danger rounded-circle d-inline-block"
+                                    style="width:10px;height:10px;"></span>
+                                <span class="dot bg-warning rounded-circle d-inline-block mx-1"
+                                    style="width:10px;height:10px;"></span>
+                                <span class="dot bg-success rounded-circle d-inline-block"
+                                    style="width:10px;height:10px;"></span>
+                            </div>
+                        </div>
+                        <span class="text-secondary"># Gestione estesa dei valori nulli</span><br>
+                        valori_nulli = [<span class="text-warning">'N.A.'</span>, <span
+                            class="text-warning">'n.d.'</span>, <span class="text-warning">'-'</span>, <span
+                            class="text-warning">'..'</span>, <span class="text-warning">'n.q.'</span>, <span
+                            class="text-warning">':'</span>]<br>
+                        df = df.replace(valori_nulli, np.nan)<br>
+                        <br>
+                        <span class="text-secondary"># Pulizia Regex per dati Eurostat (rimozione flag 'b',
+                            'u')</span><br>
+                        df[col] = df[col].astype(str).str.replace(<span class="text-warning">r'\s+[bu]'</span>, <span
+                            class="text-warning">''</span>, regex=<span class="text-success">True</span>)<br>
+                        <br>
+                        <span class="text-secondary"># Standardizzazione Colonne</span><br>
+                        df.columns = df.columns.str.lower().str.strip().str.replace(<span
+                            class="text-warning">'"'</span>, <span class="text-warning">''</span>)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technique 2: Dimensional Modeling -->
+        <section class="mb-5 pt-5">
+            <div class="row g-5 align-items-center flex-row-reverse">
+                <div class="col-lg-5">
+                    <div class="p-3">
+                        <h3 class="fw-bold text-accent mb-3">2. Modellazione Dimensionale (Star Schema)</h3>
+                        <p class="text-white-50">
+                            Per garantire analisi efficienti e scalabili, abbiamo trasformato i dati flat in un modello
+                            a schema di stella.
+                            Le dimensioni (Anno, Regione, Facoltà/Settore) sono state disaccoppiate dalle tabelle dei
+                            fatti, creando entità normalizzate
+                            con chiavi surrogate generate automaticamente.
+                        </p>
+                        <ul class="list-unstyled text-white mt-3">
+                            <li class="mb-2"><span class="text-accent me-2">✓</span>Generazione automatica di tabelle di
+                                lookup</li>
+                            <li class="mb-2"><span class="text-accent me-2">✓</span>Logica incrementale per l'aggiunta
+                                di nuovi anni</li>
+                            <li class="mb-2"><span class="text-accent me-2">✓</span>Link tramite Foreign Keys (id_anno,
+                                id_regione)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div
+                        class="code-block bg-black p-4 rounded-4 shadow-lg font-monospace small border border-secondary border-opacity-25">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">AnalyzeMIUR.py</span>
+                        </div>
+                        <span class="text-secondary"># Logica incrementale per dimensione Anno</span><br>
+                        existing_years = <span class="text-info">set</span>(ANNO_BASE_DF[<span
+                            class="text-warning">'valore'</span>])<br>
+                        new_years = [y <span class="text-success">for</span> y <span class="text-success">in</span>
+                        input_years <span class="text-success">if</span> y <span class="text-success">not in</span>
+                        existing_years]<br>
+                        <br>
+                        <span class="text-secondary"># Generazione chiavi surrogate</span><br>
+                        facolta_df[<span class="text-warning">'id_facolta'</span>] = <span
+                            class="text-info">range</span>(1, <span class="text-info">len</span>(facolta_df) + 1)<br>
+                        <br>
+                        <span class="text-secondary"># Join per Fact Table</span><br>
+                        df_final = df_pivot.merge(<br>
+                        &nbsp;&nbsp;anno_all_df[[<span class="text-warning">'id_anno'</span>, <span
+                            class="text-warning">'valore'</span>]],<br>
+                        &nbsp;&nbsp;left_on=<span class="text-warning">'ANNO_valore'</span>, right_on=<span
+                            class="text-warning">'valore'</span><br>
+                        )
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technique 3: Pivoting & Unpivoting -->
+        <section class="mb-5 pt-5">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <div class="step-card p-4 rounded-4 bg-dark h-100 border border-secondary border-opacity-25">
+                        <div class="badge bg-accent text-accent mb-3">Trasformazione 1</div>
+                        <h4>Splitting Colonne Composite</h4>
+                        <p class="text-white small">
+                            I dati Eurostat arrivavano con dimensioni aggregate in una singola colonna (es.
+                            "A,PC,TOTAL,T,IT").
+                            Abbiamo separato semanticamente questi dati creando colonne distinte per Frequenza, Unità e
+                            Geografia.
+                        </p>
+                        <div class="code-block bg-black p-3 rounded-3 mt-3 font-monospace x-small text-light">
+                            df[[<span class="text-warning">'freq'</span>, <span class="text-warning">'unit'</span>,
+                            <span class="text-warning">'geo'</span>]] = <br>
+                            df[<span class="text-warning">'DIM_COMPOSITA'</span>].str.split(<span
+                                class="text-warning">','</span>, expand=<span class="text-success">True</span>)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="step-card p-4 rounded-4 bg-dark h-100 border border-secondary border-opacity-25">
+                        <div class="badge bg-accent text-accent mb-3">Trasformazione 2</div>
+                        <h4>Unpivoting (Melt)</h4>
+                        <p class="text-white small">
+                            Per analizzare serie storiche, abbiamo convertito le strutture "Wide" (anni sulle colonne)
+                            in strutture "Long"
+                            adatte ai DB relazionali e alla visualizzazione temporale.
+                        </p>
+                        <div class="code-block bg-black p-3 rounded-3 mt-3 font-monospace x-small text-light">
+                            pd.melt(df, id_vars=[<span class="text-warning">'geo'</span>], <br>
+                            &nbsp;&nbsp;value_vars=cols_anno, <br>
+                            &nbsp;&nbsp;var_name=<span class="text-warning">'ANNO'</span>, value_name=<span
+                                class="text-warning">'valore'</span>)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="step-card p-4 rounded-4 bg-dark h-100 border border-secondary border-opacity-25">
+                        <div class="badge bg-accent text-accent mb-3">Trasformazione 3</div>
+                        <h4>Pivoting (MIUR)</h4>
+                        <p class="text-white small">
+                            Al contrario, per i dati MIUR abbiamo pivotato la colonna 'Sesso' per ottenere metriche
+                            separate
+                            (Iscritti Maschi vs Femmine) sulla stessa riga di osservazione.
+                        </p>
+                        <div class="code-block bg-black p-3 rounded-3 mt-3 font-monospace x-small text-light">
+                            df.pivot_table(<br>
+                            &nbsp;&nbsp;index=[<span class="text-warning">'ANNO'</span>, <span
+                                class="text-warning">'facolta'</span>], <br>
+                            &nbsp;&nbsp;columns=<span class="text-warning">'sesso'</span>, values=<span
+                                class="text-warning">'iscritti'</span>)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GitHub Link Section -->
+        <section class="py-5 text-center">
+            <a href="https://github.com/nicolocarcagni/genderhack2025" target="_blank"
+                class="btn btn-dark btn-lg rounded-pill px-4 py-3 border border-secondary border-opacity-25">
+                <i class="bi bi-github me-2"></i>
+                <span class="fw-bold">Visualizza su GitHub</span>
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="bg-black py-4 mt-5 text-center text-secondary small">
+        <div class="container">
+            <p class="mb-0">Rilasciato con licenza Open Source. Gender Hack Team 2025.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

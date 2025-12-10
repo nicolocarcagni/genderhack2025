@@ -1,0 +1,162 @@
+/* Global Variables */
+:root {
+    --bg-dark: #121212;
+    --bg-card: #1e1e1e;
+    --text-main: #e0e0e0;
+    --accent: #bb86fc; /* Cyberpunk Purple */
+    --accent-hover: #9955e8;
+    --secondary-accent: #03dac6; /* Teal fallback/secondary */
+}
+
+/* Base Styles */
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.text-accent {
+    color: var(--accent) !important;
+}
+
+.fw-bold {
+    font-weight: 700 !important;
+}
+
+.x-small {
+    font-size: 0.75rem;
+}
+
+/* Navbar */
+.custom-navbar {
+    background-color: rgba(18, 18, 18, 0.95); /* Glass-like opaque */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--accent) !important;
+}
+
+/* Active Indicator for Nav Links */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+/* Buttons */
+.btn-accent {
+    background-color: var(--accent);
+    color: #000;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-accent:hover {
+    background-color: var(--accent-hover);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(187, 134, 252, 0.4);
+}
+
+/* Cards */
+.stat-card, .step-card, .team-card {
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.stat-card:hover, .step-card:hover, .team-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+/* Timeline (Normalization Page) */
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+/* Adjust timeline for smaller screens */
+@media (max-width: 991px) {
+    .timeline::before {
+        left: 20px;
+    }
+}
+
+/* Code Blocks & Terminal Style */
+.code-block {
+    background-color: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #a9b7c6;
+    overflow-x: auto;
+}
+
+.window-dots {
+    display: flex;
+    align-items: center;
+}
+
+.dot {
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Chart Placeholders */
+.chart-placeholder {
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    min-height: 300px;
+    transition: border-color 0.3s ease;
+}
+
+.chart-placeholder:hover {
+    border-color: var(--accent);
+}
+
+/* Avatar */
+.avatar {
+    background-color: #2c2c2c;
+    color: var(--accent);
+}
