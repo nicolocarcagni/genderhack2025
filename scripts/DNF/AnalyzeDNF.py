@@ -50,10 +50,9 @@ class Colors:
 
 def save_csv(df, filename):
     """
-    Forza lineterminator='\\n' per evitare problemi di righe vuote extra su alcuni OS.
+    Forziamo lineterminator='\\n' per evitare problemi di righe vuote (cambia win o linux). Da provare anche con \r\n
     """
     try:
-        # Usa lineterminator esplicito per evitare problemi misti CR/LF
         df.to_csv(filename, index=False, lineterminator='\n')
         print(f"{Colors.GREEN}✅ File salvato correttamente: {filename} ({len(df)} righe){Colors.ENDC}")
         return True
@@ -62,7 +61,6 @@ def save_csv(df, filename):
         return False
 
 def confirm_action(description):
-    """Richiede conferma all'utente prima di procedere."""
     print(f"\n{Colors.CYAN}❓ Richiesta Conferma:{Colors.ENDC} {description}")
     while True:
         response = input(f"   Vuoi procedere? [Y/n]: ").strip().lower()
@@ -102,7 +100,7 @@ def analyze_nulls():
         print(f"{Colors.FAIL}Errore lettura file: {e}{Colors.ENDC}")
         return
 
-    # Clean quotes
+    # Pulizia colonne da caratteri non validi
     df.columns = df.columns.str.replace('"', '')
     for col in df.columns:
         if df[col].dtype == 'object':
@@ -110,7 +108,7 @@ def analyze_nulls():
     
     df = df.replace(valori_nulli, np.nan)
 
-    # Null analysis
+    # Analisi NULL
     print(f"\n{Colors.BOLD}[Analisi NULL]{Colors.ENDC}")
     null_value = df.isnull().sum()
     null_value_sorted = null_value[null_value > 0].sort_values(ascending=False)
@@ -119,7 +117,7 @@ def analyze_nulls():
     else:
         print(f"{Colors.GREEN}Nessun valore NULL rilevante trovato nel dataset.{Colors.ENDC}")
 
-    # Domain analysis
+    # Analisi DOMINIO
     print(f"\n{Colors.BOLD}[Analisi Dominio e Range]{Colors.ENDC}")
     for col in df.columns:
         val_distinti = df[col].unique()

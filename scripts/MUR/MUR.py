@@ -291,7 +291,7 @@ def main_menu():
     while True:
         clear_screen()
         print(f"{Colors.HEADER}======================================{Colors.ENDC}")
-        print(f"{Colors.HEADER}        AnalyzeMIUR    |   byNC&AM    {Colors.ENDC}")
+        print(f"{Colors.HEADER}        AnalyzeMUR    |   byNC&AM    {Colors.ENDC}")
         print(f"{Colors.HEADER}======================================{Colors.ENDC}")
         print(f"\n{Colors.BOLD}Scegli un'operazione:{Colors.ENDC}\n")
         print(f" {Colors.CYAN}1.{Colors.ENDC} Genera Tabella ANNI")

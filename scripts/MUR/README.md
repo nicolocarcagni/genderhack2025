@@ -1,9 +1,9 @@
 # AnalyzeMIUR Pipeline
 
-Tool Python interattivo per l'elaborazione dei dati sulle iscrizioni universitarie del MIUR (Ministero dell'Istruzione, dell'Università e della Ricerca).
+Tool Python interattivo per l'elaborazione dei dati sulle iscrizioni universitarie del MUR (Ministero dell'Università e della Ricerca).
 
 ## 📋 Descrizione
-`AnalyzeMIUR.py` è uno script ETL progettato per normalizzare e strutturare i dati storici degli iscritti universitari. Partendo dai dati grezzi, lo script estrae le dimensioni temporali e didattiche (Anni, Facoltà) e calcola la distribuzione di genere degli studenti, generando un set di tabelle relazionali pronte per l'analisi.
+`AnalyzeMUR.py` è uno script progettato per normalizzare e strutturare i dati storici degli iscritti universitari. Partendo dai dati grezzi, lo script estrae le dimensioni temporali e didattiche (Anni, Facoltà) e calcola la distribuzione di genere degli studenti, generando un set di tabelle relazionali pronte per l'analisi.
 
 ## 🛠 Prerequisiti
 *   **Python 3.x**
@@ -57,5 +57,5 @@ Il tool produce tre file CSV ottimizzati per l'importazione in database relazion
 
 ---
 **Progetto:** GenderHack  
-**Script:** `AnalyzeMIUR.py`  
+**Script:** `AnalyzeMUR.py`  
 **Autori:** NC & AM
