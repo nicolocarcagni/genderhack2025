@@ -1,0 +1,193 @@
+/* GLOBAL STYLES & VARIABLES
+-------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Brand Colors */
+  --primary-color: #6C63FF;
+  --primary-dark: #5a52d5;
+  --secondary-color: #f8f9fa;
+  --accent-color: #FF6584;
+  --dark-bg: #1a1a2e;
+  --text-main: #2d3748;
+  --text-light: #718096;
+
+  /* Typography */
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Effects */
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.18);
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  background-color: #fff;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-main);
+  /* Ensure consistent dark text */
+  letter-spacing: -0.02em;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+.carousel {
+  margin-bottom: 4rem;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-item {
+  height: 32rem;
+}
+
+.carousel-item>svg>rect {
+  fill: var(--dark-bg);
+  /* Fallback/Placeholder background */
+}
+
+/* Overlay for images to make text pop */
+.carousel-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+  pointer-events: none;
+}
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+.marketing .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  transition: transform var(--transition-medium);
+}
+
+.marketing .col-lg-4:hover {
+  transform: translateY(-5px);
+}
+
+.marketing .col-lg-4 p {
+  margin-right: .75rem;
+  margin-left: .75rem;
+  color: var(--text-light);
+}
+
+.marketing h2 {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.marketing .bd-placeholder-img {
+  border-radius: 50%;
+  box-shadow: var(--shadow-soft);
+  border: 4px solid white;
+}
+
+
+/* Featurettes
+------------------------- */
+.featurette-divider {
+  margin: 5rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.featurette-heading {
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.featurette-heading .text-body-secondary {
+  color: var(--primary-color) !important;
+}
+
+.lead {
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+/* Modern Buttons */
+.btn {
+  border-radius: 50px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: var(--text-main);
+  border: none;
+}
+
+.btn-secondary:hover {
+  background: #cbd5e0;
+  color: #1a202c;
+  transform: translateY(-2px);
+}
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+@media (min-width: 40em) {
+  .carousel-caption p {
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 62em) {
+  .featurette-heading {
+    margin-top: 7rem;
+  }
+}

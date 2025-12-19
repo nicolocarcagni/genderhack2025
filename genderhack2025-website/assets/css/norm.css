@@ -1,0 +1,82 @@
+body {
+    font-family: var(--font-body);
+    background-color: var(--secondary-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    margin-top: 5rem;
+}
+
+/* Navbar override removed to use global glassmorphism from index.css */
+
+
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    padding: 100px 0 80px 0;
+    margin-bottom: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle pattern overlay */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.content-wrapper {
+    margin-top: -60px;
+    position: relative;
+    z-index: 2;
+}
+
+.bg-light {
+    background-color: #ffffff !important;
+    box-shadow: var(--shadow-soft);
+}
+
+.card {
+    border-radius: 20px;
+    transition: all var(--transition-medium);
+    background: white;
+    border: none;
+    box-shadow: var(--shadow-soft);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover) !important;
+}
+
+.card-title {
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.badge.bg-primary {
+    background-color: var(--primary-color) !important;
+    font-weight: 600;
+    padding: 0.6em 1em;
+    border-radius: 50px;
+}
+
+footer a {
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0 40px 0;
+        clip-path: none;
+    }
+
+    .content-wrapper {
+        margin-top: 20px;
+    }
+}

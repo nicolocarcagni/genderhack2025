@@ -1,0 +1,31 @@
+footer,
+footer.container {
+  margin-top: 5rem;
+  padding: 3rem 1.5rem;
+  background-color: var(--dark-bg);
+  color: var(--secondary-color);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+}
+
+footer.container {
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+
+footer a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+footer a:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+footer p {
+  margin-bottom: 0;
+  opacity: 0.8;
+}

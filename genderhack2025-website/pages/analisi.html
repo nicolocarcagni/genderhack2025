@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="" />
+  <meta name="author" content="Andrea Maggio" />
+  <meta name="generator" content="Astro v5.13.2" />
+  <title>Analisi Dati - Gender Hack</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+  <meta name="theme-color" content="#712cf9" />
+  <link href="../assets/css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/index.css" />
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rem;
+      background-color: #0000001a;
+      border: solid rgba(0, 0, 0, 0.15);
+      border-width: 1px 0;
+      box-shadow: inset 0 0.5em 1.5em #0000001a,
+        inset 0 0.125em 0.5em #00000026;
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -0.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .bi {
+      width: 1em;
+      height: 1em;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+  </style>
+</head>
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="check2" viewBox="0 0 16 16">
+      <path
+        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z">
+      </path>
+    </symbol>
+    <symbol id="circle-half" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+    </symbol>
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+      <path
+        d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z">
+      </path>
+      <path
+        d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z">
+      </path>
+    </symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+      <path
+        d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z">
+      </path>
+    </symbol>
+  </svg>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+      <div class="container-fluid px-4">
+
+        <a class="navbar-brand d-flex align-items-center" href="../index.html">
+          <img src="../assets/images/logo_2.png" alt="Logo" class="logo-header"><span class="fw-bold tracking-tight">Gli
+            Analisti Anonimi</span>
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel">
+
+          <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+              aria-label="Close"></button>
+          </div>
+
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link px-3" href="../index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-3" href="invio_pdf.html">Ottieni il report</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-3" href="about.html">About us</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="container py-5" style="margin-top: 50px;">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h1 class="display-4 fw-bold">REPORT FINALE: "THE LEAKY PIPELINE"</h1>
+        <p class="lead text-muted">
+          Analisi del divario di genere: Università, Lavoro, Leadership.
+        </p>
+        <hr class="my-4" />
+      </div>
+      <div class="col-12">
+        <p>
+          L’obiettivo del progetto era quello di analizzare il fenomeno del
+          "Digital Gender Gap". Abbiamo voluto modellare il problema come un
+          flusso (una pipeline, appunto) per capire dove il sistema rileva
+          difficoltà nel rappresentare la compagine femminile facendo
+          riferimento nel dettaglio alla situazione accademica e all’ingresso
+          nel mondo del lavoro.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-12">
+        <h3 class="border-bottom pb-2">Metodologia e Dataset</h3>
+        <p>
+          La prima fase operativa ha riguardato la scelta dei dataset. Siamo
+          partiti dal dataset obbligatorio DNF (Dichiarazione Non
+          Finanziaria), incrociandolo con:
+        </p>
+        <ul>
+          <li>
+            <strong>Dati MUR:</strong> Iscritti per Ateneo, essenziali per
+            avere i numeri reali sulle laureate (STEM e non).
+          </li>
+          <li>
+            <strong>Dati Eurostat:</strong> Gender Employment Gap per avere un
+            termine di paragone europeo.
+          </li>
+        </ul>
+        <p>
+          I settori ATECO di riferimento analizzati sono:
+          <em>Construction and Engineering, Electronics, Media and Publishing,
+            Technology, Telecommunications.</em>
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-12">
+        <h3 class="border-bottom pb-2">
+          Distribuzione Dipendenti per Settore
+        </h3>
+        <p>
+          L'analisi ha smentito l'idea che la disuguaglianza sia uniforme
+          ovunque. Di seguito il confronto tra dipendenti donne e uomini nei
+          settori analizzati:
+        </p>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th>Settore</th>
+                <th class="text-end">Donne</th>
+                <th class="text-end">Uomini</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Media and Publishing</td>
+                <td class="text-end">13.745</td>
+                <td class="text-end">16.574</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td class="text-end">9.444</td>
+                <td class="text-end">13.869</td>
+              </tr>
+              <tr>
+                <td>Construction and Engineering</td>
+                <td class="text-end">9.941</td>
+                <td class="text-end">73.613</td>
+              </tr>
+              <tr>
+                <td>Telecommunications</td>
+                <td class="text-end">20.927</td>
+                <td class="text-end">36.018</td>
+              </tr>
+              <tr>
+                <td>Technology</td>
+                <td class="text-end">1.365</td>
+                <td class="text-end">3.244</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-12">
+        <h3 class="border-bottom pb-2">Donne nel CdA (%)</h3>
+        <p>
+          In questa sezione abbiamo trovato i dati più alti e positivi
+          dell'intero dataset, influenzati verosimilmente dalle leggi sulle
+          quote rosa.
+        </p>
+        <div class="table-responsive" style="max-height: 400px; overflow-y: auto">
+          <table class="table table-sm table-bordered">
+            <thead class="table-light sticky-top">
+              <tr>
+                <th>Settore</th>
+                <th>Azienda</th>
+                <th class="text-center">% Donne</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Construction</td>
+                <td>ASTALDI</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>ASTM</td>
+                <td class="text-center">40.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>CALTAGIRONE</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>IMPRESA PIZZAROTTI & C.</td>
+                <td class="text-center">0.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>MAIRE TECNIMONT</td>
+                <td class="text-center">44.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>MM</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>SAIPEM</td>
+                <td class="text-center">44.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>SALINI IMPREGILO</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>TREVI FIN. IND.</td>
+                <td class="text-center">36.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>BEGHELLI</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>CAREL INDUSTRIES</td>
+                <td class="text-center">43.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>CEMBRE</td>
+                <td class="text-center">38.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>DATALOGIC</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>DE LONGHI</td>
+                <td class="text-center">40.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>EL.EN.</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>ELICA</td>
+                <td class="text-center">38.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>GEFRAN</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>INDEL B</td>
+                <td class="text-center">30.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>IRCE</td>
+                <td class="text-center">13.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>SAES GROUP</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>SIT GROUP</td>
+                <td class="text-center">22.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>ARNOLDO MONDADORI</td>
+                <td class="text-center">36.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>CAIRO COMMUNICATION</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>GEDI</td>
+                <td class="text-center">21.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>IL SOLE 24 ORE</td>
+                <td class="text-center">36.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>MEDIASET</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>RAI</td>
+                <td class="text-center">29.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>RCS MEDIAGROUP</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Technology</td>
+                <td>LU-VE GROUP</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Technology</td>
+                <td>TECHEDGE SPA</td>
+                <td class="text-center">27.0</td>
+              </tr>
+              <tr>
+                <td>Telecom</td>
+                <td>EI TOWERS</td>
+                <td class="text-center">10.0</td>
+              </tr>
+              <tr>
+                <td>Telecom</td>
+                <td>INWIT</td>
+                <td class="text-center">45.0</td>
+              </tr>
+              <tr>
+                <td>Telecom</td>
+                <td>RAI WAY</td>
+                <td class="text-center">44.0</td>
+              </tr>
+              <tr>
+                <td>Telecom</td>
+                <td>TIM</td>
+                <td class="text-center">40.0</td>
+              </tr>
+              <tr>
+                <td>Telecom</td>
+                <td>TISCALI</td>
+                <td class="text-center">36.0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-12">
+        <h3 class="border-bottom pb-2">
+          Il "Leaky Pipeline": Posizioni Manageriali di Vertice
+        </h3>
+        <div class="alert alert-warning" role="alert">
+          <strong>Il vero blocco:</strong> Nelle posizioni dirigenziali
+          operative le donne scendono drasticamente. È qui che la "tubatura
+          perde": le donne entrano in azienda, ma si fermano prima di guidarle
+          a livello operativo.
+        </div>
+        <div class="table-responsive" style="max-height: 400px; overflow-y: auto">
+          <table class="table table-sm table-bordered border-warning">
+            <thead class="table-light sticky-top">
+              <tr>
+                <th>Settore</th>
+                <th>Azienda</th>
+                <th class="text-center bg-warning text-dark bg-opacity-25">
+                  % Manager Donne
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Construction</td>
+                <td>ASTALDI</td>
+                <td class="text-center">8.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>ASTM</td>
+                <td class="text-center">11.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>CALTAGIRONE</td>
+                <td class="text-center">29.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>IMPRESA PIZZAROTTI</td>
+                <td class="text-center">1.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>MAIRE TECNIMONT</td>
+                <td class="text-center">12.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>MM</td>
+                <td class="text-center">25.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>SAIPEM</td>
+                <td class="text-center">19.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>SALINI IMPREGILO</td>
+                <td class="text-center">9.0</td>
+              </tr>
+              <tr>
+                <td>Construction</td>
+                <td>TREVI FIN. IND.</td>
+                <td class="text-center">12.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>BEGHELLI</td>
+                <td class="text-center">24.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>CAREL INDUSTRIES</td>
+                <td class="text-center">9.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>CEMBRE</td>
+                <td class="text-center">11.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>DATALOGIC</td>
+                <td class="text-center">26.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>DE LONGHI</td>
+                <td class="text-center">23.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>EL.EN.</td>
+                <td class="text-center">20.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>ELICA</td>
+                <td class="text-center">12.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>GEFRAN</td>
+                <td class="text-center">13.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>INDEL B</td>
+                <td class="text-center">7.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>IRCE</td>
+                <td class="text-center">8.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>SAES GROUP</td>
+                <td class="text-center">14.0</td>
+              </tr>
+              <tr>
+                <td>Electronics</td>
+                <td>SIT GROUP</td>
+                <td class="text-center">12.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>ARNOLDO MONDADORI</td>
+                <td class="text-center">24.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>CAIRO COMMUNICATION</td>
+                <td class="text-center">37.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>GEDI</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>IL SOLE 24 ORE</td>
+                <td class="text-center">33.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>MEDIASET</td>
+                <td class="text-center">44.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>RAI</td>
+                <td class="text-center">36.0</td>
+              </tr>
+              <tr>
+                <td>Media</td>
+                <td>RCS MEDIAGROUP</td>
+                <td class="text-center">39.0</td>
+              </tr>
+              <tr>
+                <td>Technology</td>
+                <td>LU-VE GROUP</td>
+                <td class="text-center">18.0</td>
+              </tr>
+              <tr>
+                <td>Technology</td>
+                <td>TECHEDGE SPA</td>
+                <td class="text-center">21.0</td>
+              </tr>
+              <tr>
+                <td>Telecom</td>
+                <td>EI TOWERS</td>
+                <td class="text-center">16.0</td>
+              </tr>
+              <tr>
+                <td>Telecom</td>
+                <td>INWIT</td>
+                <td class="text-center">30.0</td>
+              </tr>
+              <tr>
+                <td>Telecom</td>
+                <td>RAI WAY</td>
+                <td class="text-center">17.0</td>
+              </tr>
+              <tr>
+                <td>Telecom</td>
+                <td>TIM</td>
+                <td class="text-center">28.0</td>
+              </tr>
+              <tr>
+                <td>Telecom</td>
+                <td>TISCALI</td>
+                <td class="text-center">23.0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-md-6">
+        <h3 class="border-bottom pb-2">Gender Pay Gap</h3>
+        <p>
+          Il dato più allarmante è quello assente. Oltre la metà delle aziende
+          lascia vuoto il campo del "Gender Pay Gap", e chi lo compila, mostra
+          quasi sempre un divario a sfavore delle donne.
+        </p>
+        <p>
+          Le percentuali maggiori si trovano nei settori Construction, Media e
+          Technology (tra l’85% e il 95%). Nel settore Telecommunications il
+          gap varia tra il 54% e il 98%.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <h3 class="border-bottom pb-2">Contesto Accademico</h3>
+        <p>
+          Analisi 2009-2019: Le discipline ICT mostrano un interesse crescente
+          da parte delle donne.
+        </p>
+        <table class="table table-sm table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>Facoltà</th>
+              <th>Donne</th>
+              <th>Uomini</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Arts and humanities</td>
+              <td>56.395</td>
+              <td>134.824</td>
+            </tr>
+            <tr>
+              <td>Social sciences, journalism</td>
+              <td>83.403</td>
+              <td>142.190</td>
+            </tr>
+            <tr>
+              <td>Business, admin & law</td>
+              <td>104.770</td>
+              <td>87.203</td>
+            </tr>
+            <tr>
+              <td>Engineering & construction</td>
+              <td>147.702</td>
+              <td>5.249</td>
+            </tr>
+            <tr>
+              <td>Health and welfare</td>
+              <td>27.428</td>
+              <td>766.371</td>
+            </tr>
+            <tr>
+              <td>Natural sciences, math</td>
+              <td>47.237</td>
+              <td>61.027</td>
+            </tr>
+            <tr>
+              <td>ICTs</td>
+              <td>32.707</td>
+              <td>5.638</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row mb-5 bg-light p-4 rounded">
+      <div class="col-12">
+        <h3 class="mb-3">Analisi Regionale e Macroeconomica</h3>
+
+        <figure class="figure w-100 text-center">
+          <img src="../assets/images/media_donne_cda.png" class="figure-img img-fluid rounded"
+            alt="Grafico Media Donne CdA per Regione" />
+
+          <figcaption class="figure-caption text-start mt-2">
+            Il grafico mostra come in Piemonte la media femminile nel CdA si
+            attesti al 40.0%, a sostegno dell'ipotesi che maggiori opportunità
+            sul luogo favoriscono la crescita settoriale.
+          </figcaption>
+        </figure>
+        <figure class="figure w-100 text-center">
+          <img src="../assets/images/media_donne_pos.png" class="figure-img img-fluid rounded"
+            alt="Grafico Media Donne CdA per Regione" />
+          <figcaption class="figure-caption text-start mt-2">
+            Per le posizioni manageriali di vertice, la corrispondenza
+            Lazio-Lombardia è quasi 1:1 (circa 25.7%). Il Piemonte qui non
+            figura per insufficienza di dati, evidenziando una perdita di
+            rappresentanza salendo la scala gerarchica.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-12">
+        <h4 class="text-secondary">Evoluzione Differenziali (2009-2019)</h4>
+        <p>Differenza in punti percentuali (Uomini vs Donne):</p>
+        <div class="table-responsive">
+          <table class="table table-bordered table-sm text-center">
+            <thead class="table-dark">
+              <tr>
+                <th>Anno</th>
+                <th>Diff. Occupazione (%)</th>
+                <th>Diff. Part-Time (%)</th>
+                <th>Diff. Tempo Det. (%)</th>
+                <th>Diff. Disoccupazione (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2009</td>
+                <td>19.40</td>
+                <td>-24.10</td>
+                <td>-2.30</td>
+                <td>-2.30</td>
+              </tr>
+              <tr>
+                <td>2011</td>
+                <td>18.90</td>
+                <td>-23.70</td>
+                <td>-2.30</td>
+                <td>-2.90</td>
+              </tr>
+              <tr>
+                <td>2013</td>
+                <td>19.90</td>
+                <td>-23.90</td>
+                <td>-2.20</td>
+                <td>-2.60</td>
+              </tr>
+              <tr>
+                <td>2015</td>
+                <td>19.70</td>
+                <td>-23.80</td>
+                <td>-2.70</td>
+                <td>-2.50</td>
+              </tr>
+              <tr>
+                <td>2017</td>
+                <td>19.20</td>
+                <td>-23.10</td>
+                <td>-2.90</td>
+                <td>-2.90</td>
+              </tr>
+              <tr>
+                <td>2019</td>
+                <td>19.50</td>
+                <td>-24.00</td>
+                <td>-3.70</td>
+                <td>-2.40</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small text-muted">
+          * Valori negativi indicano una prevalenza femminile (es. Part-Time).
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 p-4 border rounded shadow-sm">
+        <h3 class="text-primary">Conclusioni e Proposte</h3>
+        <p>
+          L'analisi ha mostrato che il "gap" non è uniforme: mentre la base
+          formativa è solida (con una presenza femminile STEM in crescita), si
+          evidenzia una dispersione nel passaggio al lavoro e un blocco
+          verticale all'interno delle aziende.
+        </p>
+        <p><strong>Azioni Fondamentali:</strong></p>
+        <ul>
+          <li>
+            Avere maggiori tutele in ambito digitale, non solo in ambito lavorativo ma soffermarci su una crescita a
+            monte della struttura, operando verticalmente a partire da corsi e pari opportunità nelle scuole e in ambito
+            accademico;
+            porre maggiori attenzione alla raccolta dati. Una raccolta dati che non lasci spazio a incoerenze dettate
+            dal genere e dall’ambito lavorativo; portare maggiori finanziamenti ad organizzazioni in grado di costruire
+            basi solide su cui fondare tesi e successive soluzioni pratiche, apportate ad una politica “timida” e poco
+            presente nella crescita al dialogo. Noi crediamo nelle pari opportunità, crediamo nella crescita orizzontale
+            e verticale della struttura riconducibile a questa mancata attenzione, se vogliamo, all’accesso alle
+            risorse. Risorse che devono indubbiamente crescere a livello territoriale, soprattutto nel Sud,
+            insufficiente nell’autonomia statistica. Abbattiamo le barriere e il tetto di cristallo che impongono i
+            paradigmi obsoleti della società. Il mondo del digitale ha bisogno di tutti noi, per crescere e allora diamo
+            tutto quello che è nelle nostre possibilità per offrire un volto migliore a questo mondo che ci accumuna e
+            che cresce ogni giorno sempre più.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <main>
+  </main>
+  <footer class="container text-center py-4">
+    <p class="text-dark mb-0 opacity-75">
+      &copy; 2025 - Gli Analisti Anonimi
+    </p>
+  </footer>
+</body>
+
+</html>

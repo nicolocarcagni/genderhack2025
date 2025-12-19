@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Normalizzazione - Gender Hack</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/index.css">
+  <link rel="stylesheet" href="../assets/css/norm.css">
+  <link href="../assets/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+      <div class="container-fluid px-4">
+
+        <a class="navbar-brand d-flex align-items-center" href="../index.html">
+          <img src="../assets/images/logo_2.png" alt="Logo" class="logo-header"><span class="fw-bold tracking-tight">Gli
+            Analisti Anonimi</span>
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel">
+
+          <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+              aria-label="Close"></button>
+          </div>
+
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link px-3" href="../index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-3" href="invio_pdf.html">Ottieni il report</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-3" href="about.html">About us</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+  <section class="hero-section text-center text-white d-flex align-items-center justify-content-center">
+    <div class="container">
+      <h1 class="display-3 fw-bold mb-3 text-white">La Normalizzazione</h1>
+      <p class="lead mx-auto text-white" style="max-width: 700px;">
+        Organizzare i dati efficientemente, eliminare la ridondanza e garantire l'integrità del tuo database.
+      </p>
+    </div>
+  </section>
+
+  <main class="container my-5 content-wrapper">
+
+    <div class="row g-5 mb-5">
+      <div class="col-lg-6">
+        <h2 class="text-primary fw-bold mb-4">Cos'è e a cosa serve</h2>
+        <p class="text-muted">
+          La normalizzazione è una tecnica fondamentale nella progettazione di database relazionali.
+          Il suo obiettivo è organizzare i dati per dare maggiore flessibilità al database.
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <div class="p-4 bg-light rounded-4 border border-light-subtle">
+          <h4 class="fw-bold mb-3"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Le 3 Anomalie</h4>
+          <p class="small text-muted mb-3">In un database non normalizzato si riscontrano spesso:</p>
+          <ul class="list-unstyled d-grid gap-2">
+            <li class="d-flex align-items-start">
+              <i class="bi bi-x-circle text-danger me-2 mt-1"></i>
+              <div><strong>Anomalia di inserimento:</strong> Impossibile aggiungere dati per mancanza di alcune
+                informazioni chiave.</div>
+            </li>
+            <li class="d-flex align-items-start">
+              <i class="bi bi-arrow-repeat text-danger me-2 mt-1"></i>
+              <div><strong>Anomalia di aggiornamento:</strong> I dati duplicati richiedono modifiche multiple,
+                rischiando incongruenze.</div>
+            </li>
+            <li class="d-flex align-items-start">
+              <i class="bi bi-trash text-danger me-2 mt-1"></i>
+              <div><strong>Anomalia di cancellazione:</strong> Eliminando un record si perdono involontariamente altre
+                informazioni collegate.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <h2 class="text-center fw-bold mb-5">Le 4 Forme Normali</h2>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm hover-card">
+          <div class="card-body p-4">
+            <div class="badge bg-primary mb-3">1FN</div>
+            <h3 class="h4 card-title fw-bold">Prima Forma Normale</h3>
+            <p class="card-text text-secondary">
+              La base di tutti i database relazionali. Una tabella è in 1FN se:
+            </p>
+            <ul class="small text-secondary">
+              <li>Ogni cella contiene un <strong>singolo valore</strong> (atomicità).</li>
+              <li>Non ci sono colonne che contengono liste di valori o sottotabelle.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm hover-card">
+          <div class="card-body p-4">
+            <div class="badge bg-primary mb-3">2FN</div>
+            <h3 class="h4 card-title fw-bold">Seconda Forma Normale</h3>
+            <p class="card-text text-secondary">
+              Richiede la 1FN. Elimina le <strong>dipendenze parziali</strong>.
+            </p>
+            <p class="small text-secondary">
+              Ogni attributo non-chiave deve dipendere dall'<strong>intera</strong> chiave primaria (e non solo da una
+              parte di essa, nel caso di chiavi composte).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm hover-card">
+          <div class="card-body p-4">
+            <div class="badge bg-primary mb-3">3FN</div>
+            <h3 class="h4 card-title fw-bold">Terza Forma Normale</h3>
+            <p class="card-text text-secondary">
+              Richiede la 2FN. Elimina le <strong>dipendenze transitive</strong>.
+            </p>
+            <p class="small text-secondary">
+              Ogni attributo non-chiave deve dipendere <em>solo</em> dalla chiave primaria e non da altri attributi
+              secondari.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm hover-card bg-primary-subtle">
+          <div class="card-body p-4">
+            <div class="badge bg-dark mb-3">BCNF</div>
+            <h3 class="h4 card-title fw-bold">Boyce-Codd (BCNF)</h3>
+            <p class="card-text text-secondary">
+              Un'estensione più rigorosa della 3FN. Risolve anomalie in tabelle con più chiavi candidate sovrapposte.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <footer class="container text-center py-4">
+    <p class="text-white mb-0 opacity-75">
+      &copy; 2025 - Gli Analisti Anonimi
+    </p>
+  </footer>
+</body>
+
+</html>

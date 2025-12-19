@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT Bridge | Dashboard</title>
+
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            teal: '#0d9488', // teal-600
+                            dark: '#0f172a', // slate-900
+                            light: '#f8fafc', // slate-50
+                            accent: '#6366f1', // indigo-500
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(13, 148, 136, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900">
+
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- Sidebar (Desktop) -->
+        <aside class="hidden md:flex flex-col w-64 bg-slate-900 text-white transition-all duration-300 z-20 shadow-xl">
+            <!-- Brand -->
+            <div class="h-20 flex items-center px-8 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <img src="unisalento.png" alt="Unisalento Logo"
+                        class="w-10 h-10 object-contain bg-white rounded-lg p-1">
+                    <span class="font-bold text-lg tracking-wide">ICT Bridge</span>
+                </div>
+            </div>
+
+            <!-- Nav -->
+            <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-2">
+                <p class="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Platform</p>
+
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl bg-teal-600/10 text-teal-400 font-medium transition-colors border border-teal-600/20">
+                    <i class="fa-solid fa-house w-5 text-center"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all group">
+                    <i class="fa-solid fa-rocket w-5 text-center group-hover:text-teal-400 transition-colors"></i>
+                    <span>Challenges</span>
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all group">
+                    <i class="fa-solid fa-users w-5 text-center group-hover:text-teal-400 transition-colors"></i>
+                    <span>Mentors</span>
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all group">
+                    <i class="fa-solid fa-map w-5 text-center group-hover:text-teal-400 transition-colors"></i>
+                    <span>My Journey</span>
+                </a>
+
+                <p class="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 mt-8">Community</p>
+
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all group">
+                    <i class="fa-solid fa-comments w-5 text-center group-hover:text-teal-400 transition-colors"></i>
+                    <span>Forum</span>
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all group">
+                    <i
+                        class="fa-solid fa-calendar-days w-5 text-center group-hover:text-teal-400 transition-colors"></i>
+                    <span>Events</span>
+                </a>
+            </nav>
+
+            <!-- User Mini Profile (Bottom) -->
+            <div class="p-4 border-t border-slate-800">
+                <a href="profile.html"
+                    class="flex items-center gap-3 w-full p-2 rounded-xl hover:bg-slate-800 transition-colors text-left">
+                    <img src="https://ui-avatars.com/api/?name=Giulia+Rossi&background=0d9488&color=fff" alt="Profile"
+                        class="w-9 h-9 rounded-full ring-2 ring-slate-700">
+                    <div class="flex-1 overflow-hidden">
+                        <p class="text-sm font-semibold text-white truncate">Giulia Rossi</p>
+                        <p class="text-xs text-slate-400 truncate">Student</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="flex-1 flex flex-col h-full bg-slate-50 relative overflow-hidden">
+
+            <!-- Mobile Header -->
+            <header
+                class="md:hidden glass-effect border-b border-slate-200 h-16 flex items-center justify-between px-4 sticky top-0 z-30">
+                <div class="flex items-center gap-2">
+                    <img src="unisalento.png" alt="Unisalento Logo" class="w-8 h-8 object-contain">
+                    <span class="font-bold text-slate-800">ICT Bridge</span>
+                </div>
+                <button class="text-slate-600 hover:text-teal-600 transition-colors">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </header>
+
+            <!-- Desktop Header -->
+            <header
+                class="hidden md:flex items-center justify-between px-8 py-5 bg-white/50 backdrop-blur-sm sticky top-0 z-10 w-full">
+                <!-- Search -->
+                <div class="relative w-96 hidden lg:block">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" placeholder="Search challenges, mentors, or skills..."
+                        class="w-full pl-11 pr-4 py-2.5 bg-white border-none ring-1 ring-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none shadow-sm transition-all placeholder:text-slate-400">
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-4 ml-auto">
+                    <button
+                        class="w-10 h-10 rounded-xl bg-white ring-1 ring-slate-200 flex items-center justify-center text-slate-500 hover:text-teal-600 hover:ring-teal-200 transition-all shadow-sm relative">
+                        <i class="fa-regular fa-bell"></i>
+                        <span
+                            class="absolute top-2.5 right-3 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                    </button>
+                    <button
+                        class="w-10 h-10 rounded-xl bg-white ring-1 ring-slate-200 flex items-center justify-center text-slate-500 hover:text-teal-600 hover:ring-teal-200 transition-all shadow-sm">
+                        <i class="fa-regular fa-envelope"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Scrollable Content -->
+            <main class="flex-1 overflow-y-auto p-4 md:p-8 space-y-8">
+
+                <!-- Welcome Section -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-in-up">
+                    <div>
+                        <h1 class="text-3xl font-bold text-slate-900 mb-1">Hello, Giulia! 👋</h1>
+                        <p class="text-slate-500 text-lg">Ready to use your skills for social good today?</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-2 text-sm font-medium text-teal-700 bg-teal-50 px-4 py-2 rounded-lg border border-teal-100">
+                        <i class="fa-solid fa-fire text-orange-500"></i>
+                        <span>3 Day Streak! Keep it up.</span>
+                    </div>
+                </div>
+
+                <!-- Hero Section: Impact Challenge -->
+                <section class="max-w-7xl mx-auto w-full">
+                    <div
+                        class="bg-gradient-to-r from-slate-900 via-slate-800 to-teal-900 rounded-3xl p-6 md:p-10 text-white shadow-xl relative overflow-hidden group">
+
+                        <!-- Decorative Background Blob -->
+                        <div
+                            class="absolute top-0 right-0 w-[500px] h-[500px] bg-teal-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none">
+                        </div>
+
+                        <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+                            <div class="space-y-6">
+                                <div
+                                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-teal-300 text-xs font-semibold uppercase tracking-wider border border-white/10 backdrop-blur-md">
+                                    <i class="fa-solid fa-star"></i> Recommended For You
+                                </div>
+
+                                <div>
+                                    <h2 class="text-3xl md:text-4xl font-bold mb-3 leading-tight">Project: AI for Urban
+                                        Green Spaces</h2>
+                                    <p class="text-slate-300 text-lg leading-relaxed">Help the City of Milan analyze
+                                        satellite imagery to identify areas needing more vegetation. Your code can
+                                        directly improve urban air quality.</p>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-3 py-1.5 rounded-lg bg-teal-500/20 text-teal-200 text-sm font-medium border border-teal-500/20">Machine
+                                        Learning</span>
+                                    <span
+                                        class="px-3 py-1.5 rounded-lg bg-indigo-500/20 text-indigo-200 text-sm font-medium border border-indigo-500/20">Sustainability</span>
+                                    <span
+                                        class="px-3 py-1.5 rounded-lg bg-slate-700/50 text-slate-300 text-sm font-medium border border-white/5">Python</span>
+                                </div>
+
+                                <div class="pt-2">
+                                    <button
+                                        class="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-white font-semibold px-6 py-3.5 rounded-xl transition-all shadow-lg hover:shadow-teal-500/30 hover:-translate-y-0.5">
+                                        Accept Challenge
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </button>
+                                    <button
+                                        class="ml-3 inline-flex items-center gap-2 text-slate-300 hover:text-white font-medium px-4 py-3 rounded-xl transition-colors">
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Illustration / Visual (Right Side) -->
+                            <div class="hidden md:flex justify-end relative">
+                                <div
+                                    class="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10 w-full max-w-sm transform group-hover:scale-[1.02] transition-transform duration-500 ease-out">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div
+                                            class="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center text-xl shadow-lg">
+                                            🌱
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-white">Impact Metric</p>
+                                            <p class="text-xs text-slate-400">Potential annual CO2 reduction</p>
+                                        </div>
+                                    </div>
+                                    <div class="h-24 flex items-end justify-between gap-1 mb-2">
+                                        <div class="w-1/6 bg-teal-500/30 rounded-t-lg h-[40%]"></div>
+                                        <div class="w-1/6 bg-teal-500/40 rounded-t-lg h-[60%]"></div>
+                                        <div class="w-1/6 bg-teal-500/50 rounded-t-lg h-[45%]"></div>
+                                        <div class="w-1/6 bg-teal-500/60 rounded-t-lg h-[80%]"></div>
+                                        <div
+                                            class="w-1/6 bg-teal-500 rounded-t-lg h-[100%] relative group-hover:shadow-[0_0_20px_rgba(20,184,166,0.5)] transition-shadow">
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between text-xs text-slate-400 font-mono">
+                                        <span>Jan</span>
+                                        <span>May</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Secondary Grid -->
+                <section class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto w-full pb-8">
+
+                    <!-- Mentorship Card -->
+                    <div
+                        class="bg-white rounded-2xl p-6 shadow-soft hover:shadow-lg transition-shadow border border-slate-100 flex flex-col">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="font-bold text-slate-700 flex items-center gap-2">
+                                <i class="fa-solid fa-user-group text-indigo-500"></i>
+                                Your Mentor
+                            </h3>
+                            <button class="text-slate-400 hover:text-indigo-600 transition-colors">
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-start gap-4 flex-1">
+                            <img src="https://ui-avatars.com/api/?name=Dr+Elena+Bianchi&background=6366f1&color=fff&size=128"
+                                alt="Mentor" class="w-16 h-16 rounded-2xl object-cover shadow-sm ring-4 ring-indigo-50">
+                            <div>
+                                <h4 class="font-bold text-lg text-slate-900">Dr. Elena Bianchi</h4>
+                                <p class="text-slate-500 text-sm mb-1">Senior Data Scientist @ TechCorp</p>
+                                <div class="flex items-center gap-1 text-xs text-yellow-500">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <span class="text-slate-400 ml-1">(12 sessions)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-6 border-t border-slate-50 flex items-center justify-between">
+                            <div class="text-xs text-slate-500">
+                                Next available: <span class="font-semibold text-slate-700">Tue, 24 Oct</span>
+                            </div>
+                            <button
+                                class="px-4 py-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-lg text-sm font-semibold transition-colors">
+                                Schedule Session
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- My Journey / Progress Card -->
+                    <div
+                        class="bg-white rounded-2xl p-6 shadow-soft hover:shadow-lg transition-shadow border border-slate-100 flex flex-col">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="font-bold text-slate-700 flex items-center gap-2">
+                                <i class="fa-solid fa-route text-teal-600"></i>
+                                Current Micro-Internship
+                            </h3>
+                            <span
+                                class="text-xs font-bold px-2 py-1 bg-green-100 text-green-700 rounded uppercase tracking-wide">Active</span>
+                        </div>
+
+                        <div class="flex-1 flex flex-col justify-center">
+                            <div class="flex justify-between items-end mb-2">
+                                <div>
+                                    <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Phase 2
+                                        of 3</span>
+                                    <p class="font-bold text-slate-900">Data Analysis & Cleaning</p>
+                                </div>
+                                <span class="text-2xl font-bold text-teal-600">60%</span>
+                            </div>
+
+                            <!-- Progress Bar -->
+                            <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden mb-4 relative">
+                                <div class="absolute top-0 left-0 h-full w-[60%] bg-gradient-to-r from-teal-400 to-teal-600 rounded-full transition-all duration-1000 ease-out"
+                                    style="box-shadow: 0 0 10px rgba(20, 184, 166, 0.5)"></div>
+                                <!-- Striped pattern overlay -->
+                                <div class="absolute top-0 left-0 h-full w-full opacity-30"
+                                    style="background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent); background-size: 1rem 1rem;">
+                                </div>
+                            </div>
+
+                            <p class="text-sm text-slate-500">
+                                You need to clean the "Milan_Air_Quality.csv" dataset before moving to visualization.
+                            </p>
+                        </div>
+
+                        <div class="mt-6 pt-6 border-t border-slate-50 flex gap-3">
+                            <button
+                                class="flex-1 px-4 py-2 border border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-800 rounded-lg text-sm font-semibold transition-colors">
+                                View Tasks
+                            </button>
+                            <button
+                                class="flex-1 px-4 py-2 bg-slate-900 text-white hover:bg-slate-800 rounded-lg text-sm font-semibold transition-colors">
+                                Resume Work
+                            </button>
+                        </div>
+                    </div>
+
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
